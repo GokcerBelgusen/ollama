@@ -12,6 +12,9 @@ import time
 voice = PiperVoice.load('/home/pi/ollama/voice/en_GB-alan-medium.onnx',
         config_path='/home/pi/ollama/voice/en_GB-alan-medium.onnx.json')
 
+# Configure sounddevice buffer size and latency
+sd.default.blocksize = 8192  # Set a larger block size to reduce underruns
+sd.default.latency = 'low'   # Use low latency for real-time playback
 
 class StreamingCallbackHandler(BaseCallbackHandler):
     def __init__(self):
