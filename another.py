@@ -1,8 +1,17 @@
+from langchain.callbacks.base import BaseCallbackHandler
 from langchain_ollama import OllamaLLM
+from pathlib import Path
 
-llm = OllamaLLM(model="llama3.2")
+class StreamingCallbackHandler(BaseCallbackHandler):
+    def __init__(self):
+        self.partial_output = ""
 
-query = "Tell me a joke"
+    def on_llm_new_token(self, token: str, **kwargs: any) -> None:
+        self.partial_output += token
+        print(token, end="", flush=True)
 
-for chunks in llm.stream(query):
-    print(chunks)
+llm = OllamaLLM(model="gemma2:2b", callbacks=[StreamingCallbackHandler()])
+
+question = "Uzay-zaman örtüsü nedir ? Kütle çekimi ile nasıl bir ilişkisi vardır ?" 
+
+response = llm.invoke(question)

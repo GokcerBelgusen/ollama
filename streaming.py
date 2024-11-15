@@ -21,7 +21,7 @@ class StreamingCallbackHandler(BaseCallbackHandler):
         self.partial_output += token
         print(token, end="", flush=True)
 
-llm = OllamaLLM(model="llama3.2", callbacks=[StreamingCallbackHandler()])
+llm = OllamaLLM(model="gemma2:2b", callbacks=[StreamingCallbackHandler()])
 
 question = "Tell me about The extinction of dinosaurs , how it happened ?"
 
