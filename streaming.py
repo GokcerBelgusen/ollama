@@ -26,7 +26,7 @@ class StreamingCallbackHandler(BaseCallbackHandler):
 
 llm = OllamaLLM(model="gemma2:2b", callbacks=[StreamingCallbackHandler()])
 
-question = "Tell me about The extinction of dinosaurs , how it happened ?"
+question = "Give please 1 sentence answer. Tell me about The extinction of dinosaurs, how it happened ?"
 
 response = llm.invoke(question)
 
